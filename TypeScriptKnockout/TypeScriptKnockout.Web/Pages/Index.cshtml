@@ -3,44 +3,9 @@
 @{
     ViewData["Title"] = "Home page";
 }
-<div id="message"></div>
-<div>
-    Compiler: <input id="compiler" value="TypeScript" onkeyup="document.getElementById('message').innerText = sayHello()" /><br />
-    Framework: <input id="framework" value="ASP.NET" onkeyup="document.getElementById('message').innerText = sayHello()" />
-</div>
 
-<p>
-    By <span data-bind="text: authorName"></span>
-</p>
-<p>
-    Author Name: <input type="text" data-bind="value: authorName" />
-</p>
-
-<h1>Some Article</h1>
-<p>
-  By <span data-bind="text: authorName"></span>
-  (<a data-bind="attr: { href: twitterUrl}, text: twitterAlias" ></a>)
-</p>
-<p>
-  <button data-bind="click: capitalizeTwitterAlias">Capitalize</button>
-</p>
 
 
 @section Scripts{
-    <script type="text/javascript">
 
-        function viewModel() {
-            this.authorName = ko.observable('Smithy');
-            this.twitterAlias = ko.observable('@@softwaresmith');
-
-            this.twitterUrl = ko.computed(function() {
-                return "https://twitter.com/" + this.twitterAlias().replace('@@','');
-            }, this);
-                  this.capitalizeTwitterAlias = function() {
-        var currentValue = this.twitterAlias();
-        this.twitterAlias(currentValue.toUpperCase());
-      }
-        }
-        ko.applyBindings(viewModel);
-    </script>
 }
