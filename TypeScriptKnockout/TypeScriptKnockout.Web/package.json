@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "gulp": "4.0.2",
-    "del": "5.1.0"
+    "del": "5.1.0",
+    "knockout": "3.5.1"
   }
 }
