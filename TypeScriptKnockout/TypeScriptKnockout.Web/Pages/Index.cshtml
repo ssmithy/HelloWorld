@@ -8,3 +8,20 @@
     Compiler: <input id="compiler" value="TypeScript" onkeyup="document.getElementById('message').innerText = sayHello()" /><br />
     Framework: <input id="framework" value="ASP.NET" onkeyup="document.getElementById('message').innerText = sayHello()" />
 </div>
+
+
+<p>
+    By <span data-bind="text: authorName"></span>
+</p>
+<p>
+    Author Name: <input type="text" data-bind="value: authorName" />
+</p>
+
+@section Scripts{
+    <script type="text/javascript">
+        var viewModel = {
+            authorName: ko.observable('Smithy')
+        };
+        ko.applyBindings(viewModel);
+    </script>
+}
