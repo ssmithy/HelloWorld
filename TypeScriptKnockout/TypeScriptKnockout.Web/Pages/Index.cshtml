@@ -4,8 +4,48 @@
     ViewData["Title"] = "Home page";
 }
 
-
+<h1>Record</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Opponent</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+<tbody data-bind="foreach: gameResults">
+  <tr>
+    <td><input data-bind="value:opponent" /></td>
+    <td><select data-bind="options: $root.resultChoices,
+      value:result, optionsText: $data"></select></td>
+  </tr>
+</tbody>
+</table>
+<button data-bind="click: addResult">Add New Result</button>
 
 @section Scripts{
+            <script type="text/javascript">
+          function GameResult(opponent, result) {
+            var self = this;
+            self.opponent = opponent;
+            self.result = ko.observable(result);
+          }
 
+          function ViewModel() {
+            var self = this;
+
+            self.resultChoices = ["Win", "Loss", "Tie"];
+
+                // add this to ViewModel()
+            self.addResult = function() {
+              self.gameResults.push(new GameResult("", self.resultChoices[0]));
+            }
+
+            self.gameResults = ko.observableArray([
+              new GameResult("Brendan", self.resultChoices[0]),
+              new GameResult("Brendan", self.resultChoices[0]),
+              new GameResult("Michelle", self.resultChoices[1])
+            ]);
+          };
+          ko.applyBindings(new ViewModel);
+        </script>
 }
