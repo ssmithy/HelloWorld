@@ -25,6 +25,7 @@
   <button data-bind="click: capitalizeTwitterAlias">Capitalize</button>
 </p>
 
+
 @section Scripts{
     <script type="text/javascript">
 
@@ -34,12 +35,12 @@
 
             this.twitterUrl = ko.computed(function() {
                 return "https://twitter.com/" + this.twitterAlias().replace('@@','');
-            }, this)
+            }, this);
                   this.capitalizeTwitterAlias = function() {
         var currentValue = this.twitterAlias();
         this.twitterAlias(currentValue.toUpperCase());
       }
-        };
+        }
         ko.applyBindings(viewModel);
     </script>
 }
