@@ -4,7 +4,7 @@
     ViewData["Title"] = "Home page";
 }
 
-<h1>Record</h1>
+<h1>Record <span data-bind="text: displayRecord"></span></h1>
 <table>
   <thead>
     <tr>
@@ -21,31 +21,39 @@
 </tbody>
 </table>
 <button data-bind="click: addResult">Add New Result</button>
-
+@*https://jakeydocs.readthedocs.io/en/latest/client-side/knockout.html#templates*@
 @section Scripts{
-            <script type="text/javascript">
-          function GameResult(opponent, result) {
-            var self = this;
-            self.opponent = opponent;
-            self.result = ko.observable(result);
-          }
+                <script type="text/javascript">
+              function GameResult(opponent, result) {
+                var self = this;
+                self.opponent = opponent;
+                self.result = ko.observable(result);
+              }
 
-          function ViewModel() {
-            var self = this;
+              function ViewModel() {
+                var self = this;
 
-            self.resultChoices = ["Win", "Loss", "Tie"];
+                self.resultChoices = ["Win", "Loss", "Tie"];
 
-                // add this to ViewModel()
-            self.addResult = function() {
-              self.gameResults.push(new GameResult("", self.resultChoices[0]));
-            }
+                    // add this to ViewModel()
+                self.addResult = function() {
+                  self.gameResults.push(new GameResult("", self.resultChoices[0]));
+                }
 
-            self.gameResults = ko.observableArray([
-              new GameResult("Brendan", self.resultChoices[0]),
-              new GameResult("Brendan", self.resultChoices[0]),
-              new GameResult("Michelle", self.resultChoices[1])
-            ]);
-          };
-          ko.applyBindings(new ViewModel);
-        </script>
+                self.gameResults = ko.observableArray([
+                  new GameResult("Brendan", self.resultChoices[0]),
+                  new GameResult("Brendan", self.resultChoices[0]),
+                  new GameResult("Michelle", self.resultChoices[1])
+                ]);
+
+                        self.displayRecord = ko.computed(function () {
+              var wins = self.gameResults().filter(function (value) { return value.result() == "Win"; }).length;
+              var losses = self.gameResults().filter(function (value) { return value.result() == "Loss"; }).length;
+              var ties = self.gameResults().filter(function (value) { return value.result() == "Tie"; }).length;
+              return wins + " - " + losses + " - " + ties;
+            }, this);
+
+              };
+              ko.applyBindings(new ViewModel);
+            </script>
 }
