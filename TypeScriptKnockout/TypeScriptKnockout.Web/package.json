@@ -5,6 +5,7 @@
   "devDependencies": {
     "gulp": "4.0.2",
     "del": "5.1.0",
+    "@types/jquery": "3.3.33",
     "knockout": "3.5.1"
   }
 }
