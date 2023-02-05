@@ -5,6 +5,7 @@ namespace TypeScriptKnockout.Web {
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            //Add /controllers/api-controllers?? builder.Services.AddControllers();
 
             var app = builder.Build();
 
